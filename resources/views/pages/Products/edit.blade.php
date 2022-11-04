@@ -46,7 +46,10 @@
 
             <div class="form-group">
                 <label for="price" class="form-control-label">Harga Barang</label>
-                <input type="number" name="price" value="{{ old('price') ? old('price') : $item->price }}" class="form-control @error('price') is-invalid @enderror">
+                <input type="number" 
+                        name="price" 
+                        value="{{ old('price') ? old('price') : $item->price }}" 
+                        class="form-control @error('price') is-invalid @enderror">
 
                 @error('price')
                     <div class="text-muted">{{ $message }}</div>
@@ -55,7 +58,10 @@
 
             <div class="form-group">
                 <label for="quantity" class="form-control-label">Kuantitas Barang</label>
-                <input type="number" name="quantity" value="{{ old('quantity') ? old('quantity') : $item->quantity }}" class="form-control @error('quantity') is-invalid @enderror">
+                <input type="number" 
+                        name="quantity" 
+                        value="{{ old('quantity') ? old('quantity') : $item->quantity }}" 
+                        class="form-control @error('quantity') is-invalid @enderror">
 
                 @error('quantity')
                     <div class="text-muted">{{ $message }}</div>

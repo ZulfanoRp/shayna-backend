@@ -7,9 +7,20 @@ use Illuminate\Support\Str;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\ProductRequest;
+use App\Models\ProductGallery;
 
 class ProductController extends Controller
 {
+
+     /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct(){
+        $this->middleware('auth');
+    }
+    
     /**
      * Display a listing of the resource.
      *
@@ -68,7 +79,6 @@ class ProductController extends Controller
     public function edit($id)
     {
         $item = Product::findOrFail($id);
-
         return view('pages.products.edit')-> with([
             'item' => $item
         ]);
@@ -102,6 +112,25 @@ class ProductController extends Controller
         $item = Product::findOrFail($id);
         $item->delete();
 
+        ProductGallery::where('products_id', $id)->delete();
+
         return redirect()->route('products.index');
+    }
+
+    public function gallery(Request $request, $id) {
+        $product = Product::findOrFail($id);
+        // dd($product);
+        // echo "<pre>";
+        // print_r($product);die;
+        $items =  ProductGallery::with('products')
+                -> where('products_id', $id)
+                ->get();
+        
+        // dd($items);
+
+        return view('pages.products.gallery')->with([
+            'product' => $product,
+            'items' => $items
+        ]);
     }
 }
