@@ -68,7 +68,7 @@
                                 <tbody>
                                     @forelse ($items as $item)
                                         <tr>
-                                            <td>{{ $item->id }}</td>
+                                            <td>{{ $loop->iteration}}</td>
                                             <td>{{ $item->name }}</td>
                                             <td>{{ $item->email }}</td>
                                             <td>{{ $item->number }}</td>
